@@ -2,6 +2,7 @@
     --primary-color: #1af;
     --secondary-color: Violet;
     --dark-color: #111;
+    --light-color: #999;
 }
 
 /* Resets */
@@ -14,4 +15,21 @@
 /* General */
 body {
     background-color: var(--dark-color);
+    padding: 1rem;
+    display: grid;
+    place-items: center;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: lightblue;
+}
+
+.card {
+    background-color: var(--light-color);
+    height: 300px;
+    width: 250px;
+    margin: 2rem 0;
 }
