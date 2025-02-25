@@ -30,9 +30,11 @@ function createBookCardUI(book) {
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete-button")
 
     let readButton = document.createElement("button");
     readButton.textContent = "Read";
+    readButton.classList.add("read-button")
 
     card.appendChild(title);
     card.appendChild(author);
