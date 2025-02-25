@@ -10,6 +10,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    border: 1px solid;
 }
 
 /* General */
@@ -17,11 +18,13 @@ body {
     background-color: var(--dark-color);
     display: grid;
     place-items: start;
+    font-size: 1.5em;
 }
 
 button:hover {
     cursor: pointer;
 }
+
 
 .cards-container {
     display: grid;
@@ -34,6 +37,34 @@ button:hover {
 
 .card {
     background-color: var(--light-color);
+    padding: 10px;
+    position: relative;
+}
+
+.card-title {
+    font-size: 2rem;
+}
+
+.card p {
+    margin: 1em;
+}
+
+.card button {
+    position: absolute;
+    bottom: 10px;
+    transform: scale(1.7);
+}
+
+.delete-button {
+    position: relative;
+    left: 20px;
+    background-color: Red;
+}
+
+.read-button {
+    position: relative;
+    right: 20px;
+    background-color: Green;
 }
 
 .add-button {
