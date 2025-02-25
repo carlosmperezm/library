@@ -15,7 +15,6 @@
 /* General */
 body {
     background-color: var(--dark-color);
-    padding: 1rem;
     display: grid;
     place-items: start;
 }
@@ -25,19 +24,16 @@ button:hover {
 }
 
 .cards-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 300px;
+    width: 100vw;
     gap: 1rem;
-    justify-content: center;
     padding: 1rem;
 }
 
 .card {
     background-color: var(--light-color);
-    height: 300px;
-    max-width: 250px;
-    min-width: 230px;
-    flex-grow: 1;
 }
 
 .add-button {
