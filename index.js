@@ -57,6 +57,7 @@ function createBookCardUI(book) {
     return card;
 }
 
+
 function displayBook(book) {
     let cardsContainer = document.querySelector(".cards-container");
     let card = createBookCardUI(book);
@@ -71,9 +72,66 @@ function displayBooks(library) {
     })
 }
 
+function createBookForm(action) {
+
+    const bookForm = document.createElement("form");
+    bookForm.action = action;
+    bookForm.method = "POST";
+
+
+
+    const titleP = document.createElement("p");
+    const titleInput = document.createElement("input");
+    titleInput.id = "title"
+    const titleLabel = document.createElement("label");
+    titleLabel.textContent = "Title";
+    titleLabel.htmlFor = titleInput.id;
+    titleP.appendChild(titleLabel);
+    titleP.appendChild(titleInput);
+
+    const authorP = document.createElement("p");
+    const authorInput = document.createElement("input");
+    authorInput.id = "author";
+    const authorLabel = document.createElement("label");
+    authorLabel.textContent = "Author";
+    authorLabel.htmlFor = authorInput;
+    authorP.appendChild(authorLabel);
+    authorP.appendChild(authorInput);
+
+    const pagesP = document.createElement("p");
+    const pagesInput = document.createElement("input");
+    pagesInput.type = "number";
+    pagesInput.id = "pages-number";
+    const pagesLabel = document.createElement("label");
+    pagesLabel.textContent = "Number of pages";
+    pagesLabel.htmlFor = pagesInput.id;
+    pagesP.appendChild(pagesLabel);
+    pagesP.appendChild(pagesInput);
+
+    bookForm.appendChild(titleP);
+    bookForm.appendChild(authorP);
+    bookForm.appendChild(pagesP);
+
+    return bookForm;
+}
+
+function displayFormUi(form) {
+    document.body.appendChild(form);
+}
 
 addButton.addEventListener("click", () => {
-    let book = Book("title test", "author test", "pages test");
-    addBookToLibrary(book);
-    displayBook(book);
+    const bookForm = createBookForm("/");
+    displayFormUi(bookForm);
+
+    // const bookTitle = document.querySelector("#title")
+    // const bookAuthor = document.querySelector("#author")
+    // const pagesNumber = document.querySelector("#pages-number")
+
+    // let book = Book(bookTitle, bookAuthor, pagesNumber);
+    // addBookToLibrary(book);
+    // displayBook(book);
 });
+
+
+
+

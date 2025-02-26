@@ -96,3 +96,9 @@ button:hover {
     transform: scale(1.1);
     transition: 0.2s ease;
 }
+
+form {
+    background-color: Red;
+    height: 500px;
+    width: 500px;
+}
