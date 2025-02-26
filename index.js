@@ -45,6 +45,12 @@ function createBookCardUI(book) {
     return card;
 }
 
+function displayBook(book) {
+    let cardsContainer = document.querySelector(".cards-container");
+    let card = createBookCardUI(book);
+    cardsContainer.appendChild(card);
+}
+
 function displayBooks(library) {
     let cardsContainer = document.querySelector(".cards-container");
     library.forEach((book) => {
@@ -56,7 +62,6 @@ function displayBooks(library) {
 
 addButton.addEventListener("click", () => {
     let book = Book("title test", "author test", "pages test");
-    let bookCard = createBookCardUI(book);
     addBookToLibrary(book);
-    displayBooks(library);
+    displayBook(book);
 });
