@@ -1,8 +1,9 @@
 :root {
-    --primary-color: #1af;
-    --secondary-color: Violet;
-    --dark-color: #111;
-    --light-color: #999;
+    --primary-color: #457b9d;
+    --secondary-color: #a8dadc;
+    --dark-color: #1d3557;
+    --light-color: #f1faee;
+    --delete-color: #e63946;
 }
 
 /* Resets */
@@ -10,12 +11,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 /* General */
 body {
-    background-color: var(--dark-color);
+    background-color: var(--light-color);
     display: grid;
     place-items: start;
     font-size: 1.5em;
@@ -36,9 +37,10 @@ button:hover {
 }
 
 .card {
-    background-color: var(--light-color);
-    padding: 10px;
+    background-color: var(--secondary-color);
+    padding: 5px;
     position: relative;
+    border-radius: 5px;
 }
 
 .card-title {
@@ -46,32 +48,38 @@ button:hover {
 }
 
 .card p {
-    margin: 1em;
+    margin: 1rem;
 }
 
 .card button {
     position: absolute;
-    bottom: 10px;
+    bottom: 1em;
     transform: scale(1.7);
+    width: 50px;
+    border-radius: 5px;
+    color: var(--light-color);
 }
 
 .delete-button {
     position: relative;
-    left: 20px;
-    background-color: Red;
+    left: 3em;
+    background-color: var(--delete-color);
 }
 
 .read-button {
     position: relative;
-    right: 20px;
+    right: 3em;
     background-color: Green;
 }
 
 .add-button {
     position: fixed;
-    bottom: 5rem;
+    bottom: 3rem;
     right: 5rem;
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
 }
