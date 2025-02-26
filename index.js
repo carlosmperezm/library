@@ -15,6 +15,15 @@ function addBookToLibrary(book) {
 }
 
 function createBookCardUI(book) {
+    let trashIcon = document.createElement("img");
+    trashIcon.src = "icons/delete.svg";
+    trashIcon.classList.add("icon")
+
+    let readIcon = document.createElement("img");
+    readIcon.src = "icons/read.svg";
+    readIcon.classList.add("icon")
+
+
     let card = document.createElement("div");
     card.classList.add("card");
 
@@ -28,13 +37,16 @@ function createBookCardUI(book) {
     let pages = document.createElement("p");
     pages.textContent = `Pages: ${book.pages}`
 
+
     let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    deleteButton.textContent = "Delete"
     deleteButton.classList.add("delete-button")
+    deleteButton.appendChild(trashIcon);
 
     let readButton = document.createElement("button");
     readButton.textContent = "Read";
     readButton.classList.add("read-button")
+    readButton.appendChild(readIcon);
 
     card.appendChild(title);
     card.appendChild(author);
