@@ -1,8 +1,9 @@
 :root {
-    --primary-color: #1af;
-    --secondary-color: Violet;
-    --dark-color: #111;
-    --light-color: #999;
+    --primary-color: #457b9d;
+    --secondary-color: #a8dadc;
+    --dark-color: #1d3557;
+    --light-color: #f1faee;
+    --delete-color: #e63946;
 }
 
 /* Resets */
@@ -10,15 +11,19 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 /* General */
 body {
-    background-color: var(--dark-color);
+    background-color: var(--light-color);
     display: grid;
     place-items: start;
     font-size: 1.5em;
+}
+
+button {
+    border-radius: 5px;
 }
 
 button:hover {
@@ -35,43 +40,124 @@ button:hover {
     padding: 1rem;
 }
 
-.card {
-    background-color: var(--light-color);
-    padding: 10px;
+.book-card {
+    background-color: var(--secondary-color);
+    padding: 5px;
     position: relative;
+    /* border-radius: 5px; */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
 }
 
-.card-title {
+.book-title {
     font-size: 2rem;
 }
 
-.card p {
-    margin: 1em;
+.book-card p {
+    margin: 1rem;
 }
 
-.card button {
+.book-card button {
     position: absolute;
-    bottom: 10px;
-    transform: scale(1.7);
+    bottom: 1em;
+    width: 100px;
+    height: 40px;
+    color: var(--light-color);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card button img {
+    width: 2em;
 }
 
 .delete-button {
     position: relative;
-    left: 20px;
-    background-color: Red;
+    left: 2em;
+    background-color: var(--delete-color);
 }
 
 .read-button {
     position: relative;
-    right: 20px;
+    right: 2em;
     background-color: Green;
 }
 
 .add-button {
     position: fixed;
-    bottom: 5rem;
+    bottom: 3rem;
     right: 5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+}
+
+
+form {
+    background-color: var(--secondary-color);
+    height: 500px;
+    width: 500px;
+    place-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 4rem 4rem 0 4rem;
+    position: relative;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+}
+
+form p {
+    display: flex;
+    justify-content: space-between;
+}
+
+form button {
+    padding: 1rem;
+    width: 100px;
+    align-self: center;
+    background-color: var(--light-color);
+}
+
+form .cancel-button {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+/* form .cancel-button:hover { */
+/*     cursor: pointer; */
+/*     transform: scale(1.1); */
+/*     transition: 0.2s ease; */
+/* } */
+
+.blur {
+    display: grid;
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background: #f1faee06;
+    backdrop-filter: blur(5px);
+}
+
+.clickable {
+    cursor: pointer;
+
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.clickable:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
 }
