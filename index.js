@@ -65,23 +65,16 @@ function createBookCardUI(book) {
 }
 
 
-// function displayBook(book) {
-//     let cardsContainer = document.querySelector(".cards-container");
-//     let card = createBookCardUI(book);
-//     cardsContainer.appendChild(card);
-// }
-
 function displayBooks(library) {
     let i = 0;
     const cardsContainer = document.querySelector(".cards-container");
-    cardsContainer.innerHTML = "";
+    cardsContainer.replaceChildren();
 
     library.forEach(book => {
         const card = createBookCardUI(book);
-        card.setAttribute("index-number", `${i}`)
+        card.dataset.indexNumber = i;
         cardsContainer.appendChild(card);
         i += 1;
-        // displayBook(book);
     })
 }
 
@@ -175,10 +168,11 @@ document.body.addEventListener("click", (event) => {
     if (event.target.classList.contains("cancel-button") || event.target.className == "blur") {
         bookForm.reset();
         document.body.removeChild(blurBackgroundElement);
-
+    } else if (event.target.classList.contains("delete-button")) {
+        const elementIndex = event.target.parentNode.dataset.indexNumber;
+        library.splice(elementIndex, 1);
+        displayBooks(library);
     }
 
 })
-
-
 
