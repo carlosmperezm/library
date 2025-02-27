@@ -72,10 +72,9 @@ function displayBooks(library) {
     })
 }
 
-function createBookForm(action) {
+function createBookForm() {
 
     const bookForm = document.createElement("form");
-    bookForm.action = action;
     bookForm.method = "POST";
 
 
@@ -108,9 +107,14 @@ function createBookForm(action) {
     pagesP.appendChild(pagesLabel);
     pagesP.appendChild(pagesInput);
 
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Submit";
+
     bookForm.appendChild(titleP);
     bookForm.appendChild(authorP);
     bookForm.appendChild(pagesP);
+    bookForm.appendChild(submitButton)
 
     return bookForm;
 }
@@ -120,7 +124,7 @@ function displayFormUi(form) {
 }
 
 addButton.addEventListener("click", () => {
-    const bookForm = createBookForm("/");
+    const bookForm = createBookForm();
     displayFormUi(bookForm);
 
     // const bookTitle = document.querySelector("#title")
