@@ -25,10 +25,12 @@ function createBookCardUI(book) {
 
 
     let card = document.createElement("div");
+    card.classList.add("book-card");
     card.classList.add("card");
 
+
     let title = document.createElement("p");
-    title.classList.add("card-title");
+    title.classList.add("book-title");
     title.textContent = `${book.title}`
 
     let author = document.createElement("p");
@@ -41,11 +43,13 @@ function createBookCardUI(book) {
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete"
     deleteButton.classList.add("delete-button")
+    deleteButton.classList.add("clickable")
     deleteButton.appendChild(trashIcon);
 
     let readButton = document.createElement("button");
     readButton.textContent = "Read";
     readButton.classList.add("read-button")
+    readButton.classList.add('clickable');
     readButton.appendChild(readIcon);
 
     card.appendChild(title);
@@ -76,6 +80,7 @@ function createBookForm() {
 
     const bookForm = document.createElement("form");
     bookForm.method = "POST";
+    bookForm.classList.add("card")
 
 
     const titleP = document.createElement("p");
@@ -109,10 +114,13 @@ function createBookForm() {
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
+    submitButton.classList.add('clickable');
 
     const cancelIcon = document.createElement("img");
     cancelIcon.src = "icons/cancel.svg";
     cancelIcon.classList.add('cancel-button');
+    cancelIcon.classList.add('clickable');
+
 
 
     bookForm.appendChild(titleP);
@@ -155,7 +163,7 @@ document.body.addEventListener("submit", event => {
 
 
 document.body.addEventListener("click", (event) => {
-    if (event.target.className == "cancel-button" || event.target.className == "blur") {
+    if (event.target.classList.contains("cancel-button") || event.target.className == "blur") {
         bookForm.reset();
         document.body.removeChild(blurBackgroundElement);
 

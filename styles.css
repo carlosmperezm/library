@@ -40,23 +40,23 @@ button:hover {
     padding: 1rem;
 }
 
-.card {
+.book-card {
     background-color: var(--secondary-color);
     padding: 5px;
     position: relative;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* border-radius: 5px; */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
 }
 
-.card-title {
+.book-title {
     font-size: 2rem;
 }
 
-.card p {
+.book-card p {
     margin: 1rem;
 }
 
-.card button {
+.book-card button {
     position: absolute;
     bottom: 1em;
     width: 100px;
@@ -96,10 +96,6 @@ button:hover {
     border: none;
 }
 
-button:hover {
-    transform: scale(1.1);
-    transition: 0.2s ease;
-}
 
 form {
     background-color: var(--secondary-color);
@@ -111,7 +107,7 @@ form {
     justify-content: space-around;
     padding: 4rem 4rem 0 4rem;
     position: relative;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
 }
 
 form p {
@@ -134,11 +130,11 @@ form .cancel-button {
     right: 5px;
 }
 
-form .cancel-button:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 0.2s ease;
-}
+/* form .cancel-button:hover { */
+/*     cursor: pointer; */
+/*     transform: scale(1.1); */
+/*     transition: 0.2s ease; */
+/* } */
 
 .blur {
     display: grid;
@@ -146,6 +142,22 @@ form .cancel-button:hover {
     z-index: 1;
     width: 100vw;
     height: 100vh;
-    background: #ddd6;
+    background: #f1faee06;
     backdrop-filter: blur(5px);
+}
+
+.clickable {
+    cursor: pointer;
+
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.clickable:hover {
+    transform: scale(1.1);
+    transition: 0.2s ease;
 }
