@@ -2,55 +2,58 @@ const library = [];
 const addButton = document.querySelector("button");
 
 function Book(title, author, pageNumbers) {
-    this.title = title;
-    this.author = author;
-    this.pages = pageNumbers;
+    const book = {
+        title: title,
+        author: author,
+        pages: pageNumbers,
+    }
 
-    return this
+    return book;
 }
 
 function addBookToLibrary(book) {
     library.push(book);
-    return;
+
 }
 
 function createBookCardUI(book) {
-    let trashIcon = document.createElement("img");
+    const trashIcon = document.createElement("img");
     trashIcon.src = "icons/delete.svg";
     trashIcon.classList.add("icon")
 
-    let readIcon = document.createElement("img");
+    const readIcon = document.createElement("img");
     readIcon.src = "icons/read.svg";
     readIcon.classList.add("icon")
 
 
-    let card = document.createElement("div");
+    const card = document.createElement("div");
     card.classList.add("book-card");
     card.classList.add("card");
 
 
-    let title = document.createElement("p");
+    const title = document.createElement("p");
     title.classList.add("book-title");
     title.textContent = `${book.title}`
 
-    let author = document.createElement("p");
+    const author = document.createElement("p");
     author.textContent = `By: ${book.author} `
 
-    let pages = document.createElement("p");
+    const pages = document.createElement("p");
     pages.textContent = `Pages: ${book.pages}`
 
 
-    let deleteButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete"
     deleteButton.classList.add("delete-button")
     deleteButton.classList.add("clickable")
     deleteButton.appendChild(trashIcon);
 
-    let readButton = document.createElement("button");
+    const readButton = document.createElement("button");
     readButton.textContent = "Read";
     readButton.classList.add("read-button")
     readButton.classList.add('clickable');
     readButton.appendChild(readIcon);
+
 
     card.appendChild(title);
     card.appendChild(author);
@@ -62,17 +65,23 @@ function createBookCardUI(book) {
 }
 
 
-function displayBook(book) {
-    let cardsContainer = document.querySelector(".cards-container");
-    let card = createBookCardUI(book);
-    cardsContainer.appendChild(card);
-}
+// function displayBook(book) {
+//     let cardsContainer = document.querySelector(".cards-container");
+//     let card = createBookCardUI(book);
+//     cardsContainer.appendChild(card);
+// }
 
 function displayBooks(library) {
-    let cardsContainer = document.querySelector(".cards-container");
-    library.forEach((book) => {
-        let card = createBookCardUI(book);
+    let i = 0;
+    const cardsContainer = document.querySelector(".cards-container");
+    cardsContainer.innerHTML = "";
+
+    library.forEach(book => {
+        const card = createBookCardUI(book);
+        card.setAttribute("index-number", `${i}`)
         cardsContainer.appendChild(card);
+        i += 1;
+        // displayBook(book);
     })
 }
 
@@ -154,7 +163,7 @@ document.body.addEventListener("submit", event => {
 
     const book = Book(bookTitle.value, bookAuthor.value, pagesNumber.value);
     addBookToLibrary(book);
-    displayBook(book);
+    displayBooks(library);
 
     bookForm.reset();
     document.body.removeChild(blurBackgroundElement);
