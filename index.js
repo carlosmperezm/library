@@ -83,7 +83,7 @@ function createBookForm() {
     const titleInput = document.createElement("input");
     titleInput.id = "title"
     const titleLabel = document.createElement("label");
-    titleLabel.textContent = "Title";
+    titleLabel.textContent = "Title:";
     titleLabel.htmlFor = titleInput.id;
     titleP.appendChild(titleLabel);
     titleP.appendChild(titleInput);
@@ -92,7 +92,7 @@ function createBookForm() {
     const authorInput = document.createElement("input");
     authorInput.id = "author";
     const authorLabel = document.createElement("label");
-    authorLabel.textContent = "Author";
+    authorLabel.textContent = "Author:";
     authorLabel.htmlFor = authorInput;
     authorP.appendChild(authorLabel);
     authorP.appendChild(authorInput);
@@ -102,7 +102,7 @@ function createBookForm() {
     pagesInput.type = "number";
     pagesInput.id = "pages-number";
     const pagesLabel = document.createElement("label");
-    pagesLabel.textContent = "Number of pages";
+    pagesLabel.textContent = "Number of pages:";
     pagesLabel.htmlFor = pagesInput.id;
     pagesP.appendChild(pagesLabel);
     pagesP.appendChild(pagesInput);
@@ -123,8 +123,9 @@ function displayFormUi(form) {
     document.body.appendChild(form);
 }
 
+const bookForm = createBookForm();
+
 addButton.addEventListener("click", () => {
-    const bookForm = createBookForm();
     displayFormUi(bookForm);
 
     // const bookTitle = document.querySelector("#title")
