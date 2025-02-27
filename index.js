@@ -111,10 +111,19 @@ function createBookForm() {
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
 
+    // const cancelButton = document.createElement("button");
+    // cancelButton.type = "button";
+    const cancelIcon = document.createElement("img");
+    cancelIcon.src = "icons/cancel.svg";
+    cancelIcon.classList.add('cancel-button');
+    // cancelButton.appendChild(cancelIcon);
+
+
     bookForm.appendChild(titleP);
     bookForm.appendChild(authorP);
     bookForm.appendChild(pagesP);
     bookForm.appendChild(submitButton)
+    bookForm.appendChild(cancelIcon);
 
     return bookForm;
 }
@@ -127,16 +136,32 @@ const bookForm = createBookForm();
 
 addButton.addEventListener("click", () => {
     displayFormUi(bookForm);
-
-    // const bookTitle = document.querySelector("#title")
-    // const bookAuthor = document.querySelector("#author")
-    // const pagesNumber = document.querySelector("#pages-number")
-
-    // let book = Book(bookTitle, bookAuthor, pagesNumber);
-    // addBookToLibrary(book);
-    // displayBook(book);
 });
 
+
+document.body.addEventListener("submit", event => {
+    const bookTitle = document.querySelector("#title");
+    const bookAuthor = document.querySelector("#author");
+    const pagesNumber = document.querySelector("#pages-number");
+
+    const book = Book(bookTitle.value, bookAuthor.value, pagesNumber.value);
+    addBookToLibrary(book);
+    displayBook(book);
+
+    bookForm.reset();
+    document.body.removeChild(bookForm);
+    event.preventDefault();
+})
+
+
+document.body.addEventListener("click", (event) => {
+    if (event.target.className == "cancel-button") {
+        bookForm.reset();
+        document.body.removeChild(bookForm);
+
+    }
+
+})
 
 
 
