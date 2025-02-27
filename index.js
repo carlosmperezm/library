@@ -78,7 +78,6 @@ function createBookForm() {
     bookForm.method = "POST";
 
 
-
     const titleP = document.createElement("p");
     const titleInput = document.createElement("input");
     titleInput.id = "title"
@@ -111,12 +110,9 @@ function createBookForm() {
     submitButton.type = "submit";
     submitButton.textContent = "Submit";
 
-    // const cancelButton = document.createElement("button");
-    // cancelButton.type = "button";
     const cancelIcon = document.createElement("img");
     cancelIcon.src = "icons/cancel.svg";
     cancelIcon.classList.add('cancel-button');
-    // cancelButton.appendChild(cancelIcon);
 
 
     bookForm.appendChild(titleP);
@@ -125,13 +121,17 @@ function createBookForm() {
     bookForm.appendChild(submitButton)
     bookForm.appendChild(cancelIcon);
 
+
     return bookForm;
 }
 
 function displayFormUi(form) {
-    document.body.appendChild(form);
+    blurBackgroundElement.classList.add("blur");
+    blurBackgroundElement.appendChild(form);
+    document.body.appendChild(blurBackgroundElement);
 }
 
+const blurBackgroundElement = document.createElement("div");
 const bookForm = createBookForm();
 
 addButton.addEventListener("click", () => {
@@ -149,15 +149,15 @@ document.body.addEventListener("submit", event => {
     displayBook(book);
 
     bookForm.reset();
-    document.body.removeChild(bookForm);
+    document.body.removeChild(blurBackgroundElement);
     event.preventDefault();
 })
 
 
 document.body.addEventListener("click", (event) => {
-    if (event.target.className == "cancel-button") {
+    if (event.target.className == "cancel-button" || event.target.className == "blur") {
         bookForm.reset();
-        document.body.removeChild(bookForm);
+        document.body.removeChild(blurBackgroundElement);
 
     }
 
