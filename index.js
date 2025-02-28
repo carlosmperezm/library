@@ -2,13 +2,12 @@ const library = [];
 const addButton = document.querySelector("button");
 
 function Book(title, author, pageNumbers) {
-    const book = {
-        title: title,
-        author: author,
-        pages: pageNumbers,
-    }
+    this.title = title;
+    this.author = author;
+    this.pages = pageNumbers;
+    this.read = false;
 
-    return book;
+    return this;
 }
 
 function addBookToLibrary(book) {
@@ -49,9 +48,10 @@ function createBookCardUI(book) {
     deleteButton.appendChild(trashIcon);
 
     const readButton = document.createElement("button");
-    readButton.textContent = "Read";
-    readButton.classList.add("read-button")
+    readButton.textContent = "Mark as Read";
     readButton.classList.add('clickable');
+    readButton.classList.add("read-button")
+    if (book.read) readButton.classList.add("read");
     readButton.appendChild(readIcon);
 
 
@@ -144,6 +144,14 @@ function displayFormUi(form) {
 const blurBackgroundElement = document.createElement("div");
 const bookForm = createBookForm();
 
+Book.prototype.toggleRead = function() {
+    if (this.read) this.read = false;
+    else this.read = true;
+}
+Book.prototype.isRead = function() {
+    return this.read;
+}
+
 addButton.addEventListener("click", () => {
     displayFormUi(bookForm);
 });
@@ -154,7 +162,7 @@ document.body.addEventListener("submit", event => {
     const bookAuthor = document.querySelector("#author");
     const pagesNumber = document.querySelector("#pages-number");
 
-    const book = Book(bookTitle.value, bookAuthor.value, pagesNumber.value);
+    const book = new Book(bookTitle.value, bookAuthor.value, pagesNumber.value);
     addBookToLibrary(book);
     displayBooks(library);
 
@@ -168,11 +176,36 @@ document.body.addEventListener("click", (event) => {
     if (event.target.classList.contains("cancel-button") || event.target.className == "blur") {
         bookForm.reset();
         document.body.removeChild(blurBackgroundElement);
-    } else if (event.target.classList.contains("delete-button")) {
+    }
+    else if (event.target.classList.contains("delete-button")) {
         const elementIndex = event.target.parentNode.dataset.indexNumber;
         library.splice(elementIndex, 1);
         displayBooks(library);
     }
+    else if (event.target.classList.contains("read-button")) {
+        const elementIndex = event.target.parentNode.dataset.indexNumber;
+        const book = library[elementIndex];
+        book.toggleRead();
+        const isRead = book.isRead();
+        const bookCards = document.querySelectorAll(".book-card");
+        const currentBookCard = bookCards[elementIndex];
+        const readButton = currentBookCard.querySelector(".read-button");
+
+        currentBookCard.classList.toggle("read");
+
+        // const readIcon = readButton.querySelector("img");
+
+        // alert(readButton);
+        if (isRead) {
+            readButton.textContent = "Mark as Not Read";
+        }
+        else {
+            readButton.textContent = "Mark as Read";
+            // readIcon.classList.add("icon")
+        }
+
+    }
+
 
 })
 

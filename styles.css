@@ -41,7 +41,8 @@ button:hover {
 }
 
 .book-card {
-    background-color: var(--secondary-color);
+    color: White;
+    background-color: var(--dark-color);
     padding: 5px;
     position: relative;
     /* border-radius: 5px; */
@@ -160,4 +161,12 @@ form .cancel-button {
 .clickable:hover {
     transform: scale(1.1);
     transition: 0.2s ease;
+}
+
+/* .not-read { */
+/*     background-color: var(--dark-color); */
+/* } */
+.read {
+    background-color: var(--secondary-color);
+    color: Black;
 }
