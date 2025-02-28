@@ -20,9 +20,17 @@ function createBookCardUI(book) {
     trashIcon.src = "icons/delete.svg";
     trashIcon.classList.add("icon")
 
+
     const readIcon = document.createElement("img");
     readIcon.src = "icons/read.svg";
+    readIcon.textContent = "Mark as read"
     readIcon.classList.add("icon")
+
+    const doneIcon = document.createElement("img");
+    doneIcon.src = "icons/done.svg";
+    doneIcon.classList.add("icon");
+    doneIcon.classList.add("done-icon");
+    doneIcon.classList.add("hidden");
 
 
     const card = document.createElement("div");
@@ -51,10 +59,16 @@ function createBookCardUI(book) {
     readButton.textContent = "Mark as Read";
     readButton.classList.add('clickable');
     readButton.classList.add("read-button")
-    if (book.read) readButton.classList.add("read");
+    if (book.read) {
+        doneIcon.classList.toggle("hidden");
+        card.classList.toggle("read");
+        readButton.textContent = "Mark as Not Read";
+        readIcon.src = "icons/not-read.svg"
+    }
     readButton.appendChild(readIcon);
 
 
+    card.appendChild(doneIcon);
     card.appendChild(title);
     card.appendChild(author);
     card.appendChild(pages);
@@ -83,6 +97,7 @@ function createBookForm() {
     const bookForm = document.createElement("form");
     bookForm.method = "POST";
     bookForm.classList.add("card")
+
 
 
     const titleP = document.createElement("p");
@@ -191,18 +206,23 @@ document.body.addEventListener("click", (event) => {
         const currentBookCard = bookCards[elementIndex];
         const readButton = currentBookCard.querySelector(".read-button");
 
+
         currentBookCard.classList.toggle("read");
+        const readIcon = document.createElement("img");
+        readIcon.classList.add("icon")
+        const doneIcon = currentBookCard.querySelector(".done-icon");
+        doneIcon.classList.toggle("hidden");
 
-        // const readIcon = readButton.querySelector("img");
-
-        // alert(readButton);
         if (isRead) {
+            readIcon.src = "icons/not-read.svg";
             readButton.textContent = "Mark as Not Read";
         }
         else {
+            readIcon.src = "icons/read.svg";
             readButton.textContent = "Mark as Read";
-            // readIcon.classList.add("icon")
+
         }
+        readButton.appendChild(readIcon);
 
     }
 

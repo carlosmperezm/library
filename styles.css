@@ -4,6 +4,7 @@
     --dark-color: #1d3557;
     --light-color: #f1faee;
     --delete-color: #e63946;
+    --read-color: #058c42;
 }
 
 /* Resets */
@@ -11,7 +12,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* border: 1px solid; */
 }
 
 /* General */
@@ -41,12 +41,12 @@ button:hover {
 }
 
 .book-card {
+    display: flex;
+    flex-direction: column;
     color: White;
     background-color: var(--dark-color);
     padding: 5px;
     position: relative;
-    /* border-radius: 5px; */
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
 }
 
 .book-title {
@@ -82,7 +82,7 @@ button:hover {
 .read-button {
     position: relative;
     right: 2em;
-    background-color: Green;
+    background-color: var(--read-color);
 }
 
 .add-button {
@@ -108,7 +108,6 @@ form {
     justify-content: space-around;
     padding: 4rem 4rem 0 4rem;
     position: relative;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
 }
 
 form p {
@@ -131,11 +130,6 @@ form .cancel-button {
     right: 5px;
 }
 
-/* form .cancel-button:hover { */
-/*     cursor: pointer; */
-/*     transform: scale(1.1); */
-/*     transition: 0.2s ease; */
-/* } */
 
 .blur {
     display: grid;
@@ -163,10 +157,18 @@ form .cancel-button {
     transition: 0.2s ease;
 }
 
-/* .not-read { */
-/*     background-color: var(--dark-color); */
-/* } */
 .read {
     background-color: var(--secondary-color);
     color: Black;
+}
+
+.done-icon {
+    width: 30px;
+    align-self: end;
+
+}
+
+.hidden {
+    visibility: hidden;
+
 }
