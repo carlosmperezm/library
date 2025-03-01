@@ -2,13 +2,12 @@ const library = [];
 const addButton = document.querySelector("button");
 
 function Book(title, author, pageNumbers) {
-    const book = {
-        title: title,
-        author: author,
-        pages: pageNumbers,
-    }
+    this.title = title;
+    this.author = author;
+    this.pages = pageNumbers;
+    this.read = false;
 
-    return book;
+    return this;
 }
 
 function addBookToLibrary(book) {
@@ -21,9 +20,17 @@ function createBookCardUI(book) {
     trashIcon.src = "icons/delete.svg";
     trashIcon.classList.add("icon")
 
+
     const readIcon = document.createElement("img");
     readIcon.src = "icons/read.svg";
+    readIcon.textContent = "Mark as read"
     readIcon.classList.add("icon")
+
+    const doneIcon = document.createElement("img");
+    doneIcon.src = "icons/done.svg";
+    doneIcon.classList.add("icon");
+    doneIcon.classList.add("done-icon");
+    doneIcon.classList.add("hidden");
 
 
     const card = document.createElement("div");
@@ -49,12 +56,19 @@ function createBookCardUI(book) {
     deleteButton.appendChild(trashIcon);
 
     const readButton = document.createElement("button");
-    readButton.textContent = "Read";
-    readButton.classList.add("read-button")
+    readButton.textContent = "Mark as Read";
     readButton.classList.add('clickable');
+    readButton.classList.add("read-button")
+    if (book.read) {
+        doneIcon.classList.toggle("hidden");
+        card.classList.toggle("read");
+        readButton.textContent = "Mark as Not Read";
+        readIcon.src = "icons/not-read.svg"
+    }
     readButton.appendChild(readIcon);
 
 
+    card.appendChild(doneIcon);
     card.appendChild(title);
     card.appendChild(author);
     card.appendChild(pages);
@@ -85,9 +99,11 @@ function createBookForm() {
     bookForm.classList.add("card")
 
 
+
     const titleP = document.createElement("p");
     const titleInput = document.createElement("input");
     titleInput.id = "title"
+    titleInput.required = true;
     const titleLabel = document.createElement("label");
     titleLabel.textContent = "Title:";
     titleLabel.htmlFor = titleInput.id;
@@ -97,6 +113,7 @@ function createBookForm() {
     const authorP = document.createElement("p");
     const authorInput = document.createElement("input");
     authorInput.id = "author";
+    authorInput.required = true;
     const authorLabel = document.createElement("label");
     authorLabel.textContent = "Author:";
     authorLabel.htmlFor = authorInput;
@@ -107,6 +124,7 @@ function createBookForm() {
     const pagesInput = document.createElement("input");
     pagesInput.type = "number";
     pagesInput.id = "pages-number";
+    pagesInput.required = true;
     const pagesLabel = document.createElement("label");
     pagesLabel.textContent = "Number of pages:";
     pagesLabel.htmlFor = pagesInput.id;
@@ -144,6 +162,14 @@ function displayFormUi(form) {
 const blurBackgroundElement = document.createElement("div");
 const bookForm = createBookForm();
 
+Book.prototype.toggleRead = function() {
+    if (this.read) this.read = false;
+    else this.read = true;
+}
+Book.prototype.isRead = function() {
+    return this.read;
+}
+
 addButton.addEventListener("click", () => {
     displayFormUi(bookForm);
 });
@@ -154,7 +180,7 @@ document.body.addEventListener("submit", event => {
     const bookAuthor = document.querySelector("#author");
     const pagesNumber = document.querySelector("#pages-number");
 
-    const book = Book(bookTitle.value, bookAuthor.value, pagesNumber.value);
+    const book = new Book(bookTitle.value, bookAuthor.value, pagesNumber.value);
     addBookToLibrary(book);
     displayBooks(library);
 
@@ -168,11 +194,41 @@ document.body.addEventListener("click", (event) => {
     if (event.target.classList.contains("cancel-button") || event.target.className == "blur") {
         bookForm.reset();
         document.body.removeChild(blurBackgroundElement);
-    } else if (event.target.classList.contains("delete-button")) {
+    }
+    else if (event.target.classList.contains("delete-button")) {
         const elementIndex = event.target.parentNode.dataset.indexNumber;
         library.splice(elementIndex, 1);
         displayBooks(library);
     }
+    else if (event.target.classList.contains("read-button")) {
+        const elementIndex = event.target.parentNode.dataset.indexNumber;
+        const book = library[elementIndex];
+        book.toggleRead();
+        const isRead = book.isRead();
+        const bookCards = document.querySelectorAll(".book-card");
+        const currentBookCard = bookCards[elementIndex];
+        const readButton = currentBookCard.querySelector(".read-button");
+
+
+        currentBookCard.classList.toggle("read");
+        const readIcon = document.createElement("img");
+        readIcon.classList.add("icon")
+        const doneIcon = currentBookCard.querySelector(".done-icon");
+        doneIcon.classList.toggle("hidden");
+
+        if (isRead) {
+            readIcon.src = "icons/not-read.svg";
+            readButton.textContent = "Mark as Not Read";
+        }
+        else {
+            readIcon.src = "icons/read.svg";
+            readButton.textContent = "Mark as Read";
+
+        }
+        readButton.appendChild(readIcon);
+
+    }
+
 
 })
 
