@@ -5,6 +5,7 @@
     --light-color: #f1faee;
     --delete-color: #e63946;
     --read-color: #058c42;
+    --radius-measure: 5px
 }
 
 /* Resets */
@@ -22,8 +23,9 @@ body {
     font-size: 1.5em;
 }
 
-button {
-    border-radius: 5px;
+button,
+input {
+    border-radius: var(--radius-measure);
 }
 
 button:hover {
@@ -133,6 +135,27 @@ form .cancel-button {
     right: 5px;
 }
 
+form input:invalid {
+    border: 2px solid var(--delete-color);
+}
+
+form input:valid {
+    border: 2px solid var(--read-color);
+}
+
+form input:focus-visible {
+    outline: none
+}
+
+form:valid button[type="submit"] {
+    background-color: var(--read-color);
+    color: var(--light-color);
+}
+
+form:invalid button[type="submit"] {
+    cursor: not-allowed;
+}
+
 
 .blur {
     display: grid;
@@ -150,7 +173,7 @@ form .cancel-button {
 }
 
 .card {
-    border-radius: 5px;
+    border-radius: var(--radius-measure);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
 }

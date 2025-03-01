@@ -103,6 +103,7 @@ function createBookForm() {
     const titleP = document.createElement("p");
     const titleInput = document.createElement("input");
     titleInput.id = "title"
+    titleInput.required = true;
     const titleLabel = document.createElement("label");
     titleLabel.textContent = "Title:";
     titleLabel.htmlFor = titleInput.id;
@@ -112,6 +113,7 @@ function createBookForm() {
     const authorP = document.createElement("p");
     const authorInput = document.createElement("input");
     authorInput.id = "author";
+    authorInput.required = true;
     const authorLabel = document.createElement("label");
     authorLabel.textContent = "Author:";
     authorLabel.htmlFor = authorInput;
@@ -122,6 +124,7 @@ function createBookForm() {
     const pagesInput = document.createElement("input");
     pagesInput.type = "number";
     pagesInput.id = "pages-number";
+    pagesInput.required = true;
     const pagesLabel = document.createElement("label");
     pagesLabel.textContent = "Number of pages:";
     pagesLabel.htmlFor = pagesInput.id;
