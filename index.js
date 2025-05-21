@@ -1,3 +1,4 @@
+
 const library = [];
 const addButton = document.querySelector('button');
 
@@ -49,10 +50,8 @@ class BookCardUI {
     this.#createPagesElement();
     this.#createDeleteButton();
     this.#createReadButton();
-
     this.#card.classList.add('book-card');
     this.#card.classList.add('card');
-
 
     if (book.isRead) {
       this.#doneIcon.classList.toggle('hidden');
@@ -61,8 +60,6 @@ class BookCardUI {
       this.#readIcon.src = 'icons/not-read.svg';
     }
     this.#readButton.appendChild(this.#readIcon);
-
-
     this.#card.appendChild(this.#doneIcon);
     this.#card.appendChild(this.#title);
     this.#card.appendChild(this.#author);
@@ -71,38 +68,31 @@ class BookCardUI {
     this.#card.appendChild(this.#readButton);
 
     return this.#card;
-
   }
-
   #createReadIcon(src) {
     this.#readIcon = document.createElement('img');
     this.#readIcon.src = src;
     this.#readIcon.textContent = 'Mark as read';
     this.#readIcon.classList.add('icon');
   }
-
   #createDoneIcon(src) {
     this.#doneIcon = document.createElement('img');
     this.#doneIcon.src = src;
     this.#doneIcon.classList.add('icon');
     this.#doneIcon.classList.add('done-icon');
     this.#doneIcon.classList.add('hidden');
-
   }
   #createTitleElement() {
     this.#title = document.createElement('p');
     this.#title.classList.add('book-title');
     this.#title.textContent = `${this.#book.title}`;
-
   }
   #createAuthorElement() {
     this.#author = document.createElement('p');
     this.#author.textContent = `By: ${this.#book.author} `;
-
   }
   #createPagesElement() {
     this.#pages = document.createElement('p');
-
     this.#pages.textContent = `Pages: ${this.#book.pages}`;
   }
   #createDeleteButton() {
@@ -111,16 +101,13 @@ class BookCardUI {
     this.#deleteButton.classList.add('delete-button');
     this.#deleteButton.classList.add('clickable');
     this.#deleteButton.appendChild(this.#trashIcon);
-
   }
   #createReadButton() {
     this.#readButton = document.createElement('button');
     this.#readButton.textContent = 'Mark as Read';
     this.#readButton.classList.add('clickable');
     this.#readButton.classList.add('read-button');
-
   }
-
   #createTrasIcon(src) {
     this.#trashIcon = document.createElement('img');
     this.#trashIcon.src = src;
@@ -134,7 +121,6 @@ class BookForm {
   constructor() {
     if (this.#instance) return this.#instance;
     return this.#createBookForm();
-
   }
 
   #createBookForm() {
@@ -146,6 +132,8 @@ class BookForm {
     const titleInput = document.createElement('input');
     titleInput.id = 'title';
     titleInput.required = true;
+    titleInput.maxLength = 20;
+    titleInput.minLength = 5;
     const titleLabel = document.createElement('label');
     titleLabel.textContent = 'Title:';
     titleLabel.htmlFor = titleInput.id;
@@ -156,6 +144,8 @@ class BookForm {
     const authorInput = document.createElement('input');
     authorInput.id = 'author';
     authorInput.required = true;
+    authorInput.maxLength = 40;
+    authorInput.minLength = 5;
     const authorLabel = document.createElement('label');
     authorLabel.textContent = 'Author:';
     authorLabel.htmlFor = authorInput;
@@ -167,6 +157,7 @@ class BookForm {
     pagesInput.type = 'number';
     pagesInput.id = 'pages-number';
     pagesInput.required = true;
+    pagesInput.min = 10;
     const pagesLabel = document.createElement('label');
     pagesLabel.textContent = 'Number of pages:';
     pagesLabel.htmlFor = pagesInput.id;
@@ -183,14 +174,11 @@ class BookForm {
     cancelIcon.classList.add('cancel-button');
     cancelIcon.classList.add('clickable');
 
-
-
     this.#instance.appendChild(titleP);
     this.#instance.appendChild(authorP);
     this.#instance.appendChild(pagesP);
     this.#instance.appendChild(submitButton);
     this.#instance.appendChild(cancelIcon);
-
 
     return this.#instance;
   }
@@ -251,13 +239,13 @@ document.body.addEventListener('click', (event) => {
   if (event.target.classList.contains('cancel-button') || event.target.className === 'blur') {
     bookForm.reset();
     document.body.removeChild(blurBackgroundElement);
-  }
-  else if (event.target.classList.contains('delete-button')) {
+
+  } else if (event.target.classList.contains('delete-button')) {
     const elementIndex = event.target.parentNode.dataset.indexNumber;
     library.splice(elementIndex, 1);
     displayBooks(library);
-  }
-  else if (event.target.classList.contains('read-button')) {
+
+  } else if (event.target.classList.contains('read-button')) {
     const elementIndex = event.target.parentNode.dataset.indexNumber;
     const book = library[elementIndex];
     book.toggleRead();
@@ -265,7 +253,6 @@ document.body.addEventListener('click', (event) => {
     const bookCards = document.querySelectorAll('.book-card');
     const currentBookCard = bookCards[elementIndex];
     const readButton = currentBookCard.querySelector('.read-button');
-
 
     currentBookCard.classList.toggle('read');
     const readIcon = document.createElement('img');
@@ -276,16 +263,11 @@ document.body.addEventListener('click', (event) => {
     if (isRead) {
       readIcon.src = 'icons/not-read.svg';
       readButton.textContent = 'Mark as Not Read';
-    }
-    else {
+    } else {
       readIcon.src = 'icons/read.svg';
       readButton.textContent = 'Mark as Read';
-
     }
     readButton.appendChild(readIcon);
-
   }
-
-
 });
 
